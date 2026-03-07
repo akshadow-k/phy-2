@@ -338,15 +338,24 @@
         <div id="notes-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-14 p-2 md:p-4"></div>
     </section>
 
-    <!-- VIDEO MODAL -->
+    <!-- VIDEO MODAL WITH CINEMATIC FIXES -->
     <div id="video-modal" class="fixed inset-0 z-[150] bg-[#060403]/98 backdrop-blur-2xl hidden flex-col items-center justify-center p-4 md:p-12 opacity-0 transition-opacity duration-500">
         <button onclick="closeVideoAndShowPopup()" class="hoverable absolute top-4 right-4 md:top-10 md:right-10 text-gray-500 hover:text-[#d4af37] hover:rotate-90 transition-all duration-300 text-4xl md:text-6xl z-50">
             <i class="fa-solid fa-xmark"></i>
         </button>
-        <div class="w-full max-w-7xl aspect-video bg-black rounded-sm overflow-hidden shadow-[0_0_150px_rgba(212,175,55,0.2)] relative scale-95 transition-transform duration-500 border border-[#d4af37]/20" id="video-container">
-            <video id="farewell-video" controls class="w-full h-full object-cover">
-                <!-- Replace with your actual video link -->
-                <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+        <div class="w-full max-w-7xl aspect-video bg-black rounded-lg overflow-hidden shadow-[0_0_80px_rgba(212,175,55,0.15)] relative scale-95 transition-transform duration-500 border border-[#d4af37]/30 ring-1 ring-white/10" id="video-container">
+            
+            <!-- CINEMATIC BARS EFFECT -->
+            <div class="absolute top-0 left-0 w-full h-8 md:h-16 bg-black z-10 pointer-events-none opacity-80"></div>
+            <div class="absolute bottom-0 left-0 w-full h-8 md:h-16 bg-black z-10 pointer-events-none opacity-80"></div>
+
+            <video id="farewell-video" controls playsinline preload="auto" class="w-full h-full object-contain" poster="IMG-20260307-WA0139.jpg">
+                <!-- REPLACE WITH YOUR VIDEO LINK: MUST BE EXACTLY NAMED 'farewell-video.mp4' -->
+                <source src="farewell-video.mp4" type="video/mp4">
+                <div class="flex flex-col items-center justify-center h-full text-[#d4af37] bg-[#0d0a08]">
+                    <i class="fa-solid fa-triangle-exclamation text-4xl mb-4"></i>
+                    <p class="font-serif-title tracking-widest uppercase">Video not found. Please rename your video to <b>farewell-video.mp4</b></p>
+                </div>
             </video>
         </div>
     </div>
@@ -757,6 +766,7 @@
             videoContainer.classList.add('scale-95');
             videoElement.pause();
             
+            // Resume background music when video closes
             if(isMusicPlaying) {
                 bgMusic.play();
                 musicIcon.classList.remove('fa-volume-xmark');
@@ -765,6 +775,7 @@
 
             setTimeout(() => { 
                 videoModal.classList.add('hidden'); 
+                videoElement.currentTime = 0; // Reset video to the beginning
                 guestbookModal.classList.remove('hidden');
                 setTimeout(() => {
                     guestbookModal.classList.remove('opacity-0');
