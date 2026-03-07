@@ -222,8 +222,8 @@
 </head>
 <body class="selection:bg-yellow-600/30 selection:text-yellow-100">
 
-    <!-- 🌟 AUDIO ELEMENT 🌟 -->
-    <audio id="bg-music" loop preload="auto">
+    <!-- 🌟 AUDIO ELEMENT WITH AUTOPLAY 🌟 -->
+    <audio id="bg-music" loop preload="auto" autoplay>
         <source src="audio.mp3" type="audio/mpeg">
     </audio>
 
@@ -385,12 +385,27 @@
 
     <!-- JAVASCRIPT LOGIC -->
     <script>
-        // --- 1. PRELOADER & MUSIC INIT ---
+        // --- 1. PRELOADER & AGGRESSIVE MUSIC AUTOPLAY ---
         const musicToggleBtn = document.getElementById('music-toggle-btn');
         const bgMusic = document.getElementById('bg-music');
         const musicIcon = document.getElementById('music-icon');
         const musicText = document.getElementById('music-text');
         let isMusicPlaying = false;
+
+        // Helper function to handle UI when music starts
+        function setMusicPlayingUI() {
+            isMusicPlaying = true;
+            musicIcon.classList.remove('fa-volume-xmark', 'fa-music');
+            musicIcon.classList.add('fa-volume-up', 'animate-bounce');
+            musicText.innerText = "Music On";
+            
+            setTimeout(() => {
+                musicText.style.display = 'none';
+                musicToggleBtn.classList.remove('px-4', 'px-5');
+                musicToggleBtn.classList.add('w-12', 'h-12', 'md:w-14', 'md:h-14');
+                musicIcon.classList.remove('mr-2');
+            }, 3000);
+        }
 
         window.addEventListener('load', () => {
             const preloader = document.getElementById('preloader');
@@ -402,30 +417,30 @@
                     setTimeout(() => musicToggleBtn.classList.remove('opacity-0'), 100);
                 }, 1200);
             }, 1000);
+
+            // ATTEMPT 1: Aggressive Autoplay immediately on load
+            const playPromise = bgMusic.play();
+            if (playPromise !== undefined) {
+                playPromise.then(() => {
+                    setMusicPlayingUI(); // It worked!
+                }).catch(error => {
+                    console.log("Autoplay blocked by browser. Waiting for user interaction.");
+                });
+            }
         });
 
-        // --- 2. AUDIO PLAYER LOGIC ---
+        // --- 2. AUDIO PLAYER TOGGLE LOGIC ---
         function toggleMusic() {
             if (isMusicPlaying) {
                 bgMusic.pause();
                 musicIcon.classList.remove('fa-volume-up', 'animate-bounce');
                 musicIcon.classList.add('fa-volume-xmark');
                 musicText.innerText = "Music Off";
+                isMusicPlaying = false;
             } else {
-                bgMusic.play().catch(e => console.log("Audio autoplay blocked, needs interaction first."));
-                musicIcon.classList.remove('fa-volume-xmark', 'fa-music');
-                musicIcon.classList.add('fa-volume-up', 'animate-bounce');
-                musicText.innerText = "Music On";
-            }
-            isMusicPlaying = !isMusicPlaying;
-            
-            if (isMusicPlaying) {
-                setTimeout(() => {
-                    musicText.style.display = 'none';
-                    musicToggleBtn.classList.remove('px-4', 'px-5');
-                    musicToggleBtn.classList.add('w-12', 'h-12', 'md:w-14', 'md:h-14');
-                    musicIcon.classList.remove('mr-2');
-                }, 3000);
+                bgMusic.play().then(() => {
+                    setMusicPlayingUI();
+                }).catch(e => console.log("Audio play failed."));
             }
         }
 
@@ -434,10 +449,14 @@
             toggleMusic();
         });
 
+        // ATTEMPT 2: Fallback Autoplay - Start music on the absolute FIRST interaction anywhere on the page
         document.addEventListener('click', function initAudio() {
             if (!isMusicPlaying) {
-                toggleMusic();
+                bgMusic.play().then(() => {
+                    setMusicPlayingUI();
+                }).catch(e => console.log("Interaction play failed."));
             }
+            // Remove listener so it only triggers once
             document.removeEventListener('click', initAudio);
         }, { once: true });
 
