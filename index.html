@@ -579,39 +579,41 @@
 
         initParticles(); animateParticles();
 
-        // --- 6. PHYSICS-THEMED PHOTO COPY ---
+        // --- 6. PHYSICS-THEMED PHOTO COPY WITH ORIGINAL FILENAMES ---
         const photoData = [
             // Chapter 1: The Ground State
-            { year: "The Ground State", title: "Classroom Chronicles", desc: "The legendary backbenchers who understood the chemistry of friendship better than the syllabus.", img: "photo1.jpg", rot: "-rotate-2" },
-            { year: "The Ground State", title: "Surviving the Syllabus", desc: "Derivations on the board, but our minds were already calculating the escape velocity.", img: "photo2.jpg", rot: "rotate-2" },
-            { year: "The Ground State", title: "First Selfies", desc: "Focusing our lenses. The start of a bond stronger than strong nuclear forces.", img: "photo3.jpg", rot: "-rotate-1" },
-            { year: "The Ground State", title: "Finding Our Tribe", desc: "Particles attracting. The core squad coming together to form an unbreakable lattice.", img: "photo4.jpg", rot: "rotate-2" },
+            { year: "The Ground State", title: "Classroom Chronicles", desc: "The legendary backbenchers who understood the chemistry of friendship better than the syllabus.", img: "IMG-20260307-WA0156.jpg", rot: "-rotate-2" },
+            { year: "The Ground State", title: "Surviving the Syllabus", desc: "Derivations on the board, but our minds were already calculating the escape velocity.", img: "IMG-20260307-WA0095.jpg", rot: "rotate-2" },
+            { year: "The Ground State", title: "First Selfies", desc: "Focusing our lenses. The start of a bond stronger than strong nuclear forces.", img: "IMG-20260307-WA0061.jpg", rot: "-rotate-1" },
+            { year: "The Ground State", title: "Finding Our Tribe", desc: "Particles attracting. The core squad coming together to form an unbreakable lattice.", img: "IMG-20260307-WA0103.jpg", rot: "rotate-2" },
+            { year: "The Ground State", title: "Basking in Memories", desc: "Taking a break under the bright sun and making every second count.", img: "1000114718.jpg", rot: "-rotate-2" },
             
             // Chapter 2: Kinetic Energy
-            { year: "Kinetic Energy", title: "Desk MGC-PHY-D30", desc: "The legendary Physics desk. Where gravity felt a little lighter and laughter echoed louder.", img: "photo6.jpg", rot: "rotate-1" },
-            { year: "Kinetic Energy", title: "Optics Lab Shenanigans", desc: "Lab practicals: Adjusting the webcam focal length for the absolute perfect group shot.", img: "photo7.jpg", rot: "-rotate-3" },
-            { year: "Kinetic Energy", title: "Circle of Trust", desc: "A unified field. Looking down at the camera but always lifting each other up.", img: "photo8.jpg", rot: "rotate-2" },
-            { year: "Kinetic Energy", title: "Conservation of Energy", desc: "Chilling outdoors, enjoying the campus breeze and conserving our kinetic energy.", img: "photo9.jpg", rot: "-rotate-2" },
-            { year: "Kinetic Energy", title: "The Elements", desc: "Standing together in the sun, absorbing maximum radiation.", img: "photo10.jpg", rot: "rotate-1" },
-            { year: "Kinetic Energy", title: "Centripetal Force", desc: "Another legendary downward circle selfie drawing everyone to the center.", img: "photo11.jpg", rot: "-rotate-1" },
+            { year: "Kinetic Energy", title: "Desk MGC-PHY-D30", desc: "The legendary Physics desk. Where gravity felt a little lighter and laughter echoed louder.", img: "IMG-20260307-WA0092.jpg", rot: "rotate-1" },
+            { year: "Kinetic Energy", title: "Optics Lab Shenanigans", desc: "Lab practicals: Adjusting the webcam focal length for the absolute perfect group shot.", img: "IMG-20260307-WA0093.jpg", rot: "-rotate-3" },
+            { year: "Kinetic Energy", title: "Circle of Trust", desc: "A unified field. Looking down at the camera but always lifting each other up.", img: "1000114717.jpg", rot: "rotate-2" },
+            { year: "Kinetic Energy", title: "Conservation of Energy", desc: "Chilling outdoors, enjoying the campus breeze and conserving our kinetic energy.", img: "IMG-20260307-WA0101.jpg", rot: "-rotate-2" },
+            { year: "Kinetic Energy", title: "The Elements", desc: "Standing together in the sun, absorbing maximum radiation.", img: "IMG-20260307-WA0127.jpg", rot: "rotate-1" },
+            { year: "Kinetic Energy", title: "Centripetal Force", desc: "Another legendary downward circle selfie drawing everyone to the center.", img: "IMG-20260307-WA0119.jpg", rot: "-rotate-1" },
 
             // Chapter 3: The Visible Spectrum
-            { year: "The Visible Spectrum", title: "Traditional Days", desc: "Trading lab coats for Kerala Kasavu. The frequency of joy was at its absolute peak.", img: "photo12.jpg", rot: "rotate-2" },
-            { year: "The Visible Spectrum", title: "Thermodynamics of Joy", desc: "Secret Santa cake cutting and spreading warmth during the winter semester.", img: "photo13.jpg", rot: "-rotate-1" },
-            { year: "The Visible Spectrum", title: "Festive Frequencies", desc: "Twinkling lights and festive vibes wrapped around the Christmas tree.", img: "photo14.jpg", rot: "rotate-3" },
-            { year: "The Visible Spectrum", title: "The Brotherhood", desc: "The boys establishing equilibrium by the Management block.", img: "photo15.jpg", rot: "-rotate-2" },
-            { year: "The Visible Spectrum", title: "Maximum Density", desc: "Squeezing the entire class mass into one single classroom volume.", img: "photo16.jpg", rot: "rotate-1" },
+            { year: "The Visible Spectrum", title: "Traditional Days", desc: "Trading lab coats for Kerala Kasavu. The frequency of joy was at its absolute peak.", img: "IMG-20260307-WA0149.jpg", rot: "rotate-2" },
+            { year: "The Visible Spectrum", title: "Thermodynamics of Joy", desc: "Secret Santa cake cutting and spreading warmth during the winter semester.", img: "IMG-20260307-WA0100.jpg", rot: "-rotate-1" },
+            { year: "The Visible Spectrum", title: "Festive Frequencies", desc: "Twinkling lights and festive vibes wrapped around the Christmas tree.", img: "IMG-20260307-WA0078.jpg", rot: "rotate-3" },
+            { year: "The Visible Spectrum", title: "The Brotherhood", desc: "The boys establishing equilibrium by the Management block.", img: "IMG-20260307-WA0109.jpg", rot: "-rotate-2" },
+            { year: "The Visible Spectrum", title: "Maximum Density", desc: "Squeezing the entire class mass into one single classroom volume.", img: "IMG-20260307-WA0107.jpg", rot: "rotate-1" },
 
             // Chapter 4: Maximum Potential
-            { year: "Maximum Potential", title: "Defying Gravity", desc: "Escaping the campus gravitational pull for the beautiful, misty green hills.", img: "photo17.jpg", rot: "-rotate-3" },
-            { year: "Maximum Potential", title: "Picture Perfect", desc: "Capturing the optimal wavelength of smiles amidst the endless tea estates.", img: "photo18.jpg", rot: "rotate-2" },
-            { year: "Maximum Potential", title: "Brothers in Arms", desc: "Posing like absolute bosses with maximum momentum in the middle of nowhere.", img: "photo19.jpg", rot: "-rotate-1" },
-            { year: "Maximum Potential", title: "Golden Hour Optics", desc: "Perfect light refraction creating the kind of memories that last a lifetime.", img: "photo20.jpg", rot: "rotate-2" },
-            { year: "Maximum Potential", title: "Candid Entropy", desc: "Why take a normal, ordered picture when you can maximize the chaos?", img: "photo21.jpg", rot: "-rotate-2" },
-            { year: "Maximum Potential", title: "Above the Clouds", desc: "Reaching peak altitude on the viewing deck, surrounded by the atmosphere.", img: "photo22.jpg", rot: "rotate-1" },
-            { year: "Maximum Potential", title: "Absolute Zero", desc: "The wind was freezing, but the thermal energy of the group kept us warm.", img: "photo23.jpg", rot: "-rotate-2" },
-            { year: "Maximum Potential", title: "Edge of the Universe", desc: "Sitting on the rocks, conquering the mountains and taking in the breathtaking view.", img: "photo24.jpg", rot: "rotate-2" },
-            { year: "Maximum Potential", title: "A Unified Theory", desc: "Scattered in the tea gardens, cheering for the best days of our lives.", img: "photo26.jpg", rot: "rotate-3" }
+            { year: "Maximum Potential", title: "Defying Gravity", desc: "Escaping the campus gravitational pull for the beautiful, misty green hills.", img: "IMG-20260307-WA0144.jpg", rot: "-rotate-3" },
+            { year: "Maximum Potential", title: "Picture Perfect", desc: "Capturing the optimal wavelength of smiles amidst the endless tea estates.", img: "IMG-20260307-WA0148(1).jpg", rot: "rotate-2" },
+            { year: "Maximum Potential", title: "Brothers in Arms", desc: "Posing like absolute bosses with maximum momentum in the middle of nowhere.", img: "IMG-20260307-WA0137.jpg", rot: "-rotate-1" },
+            { year: "Maximum Potential", title: "Golden Hour Optics", desc: "Perfect light refraction creating the kind of memories that last a lifetime.", img: "IMG-20260307-WA0129(1).jpg", rot: "rotate-2" },
+            { year: "Maximum Potential", title: "Candid Entropy", desc: "Why take a normal, ordered picture when you can maximize the chaos?", img: "IMG-20260307-WA0138.jpg", rot: "-rotate-2" },
+            { year: "Maximum Potential", title: "Above the Clouds", desc: "Reaching peak altitude on the viewing deck, surrounded by the atmosphere.", img: "IMG-20260307-WA0122.jpg", rot: "rotate-1" },
+            { year: "Maximum Potential", title: "Absolute Zero", desc: "The wind was freezing, but the thermal energy of the group kept us warm.", img: "IMG-20260307-WA0123.jpg", rot: "-rotate-2" },
+            { year: "Maximum Potential", title: "Conquering the Heights", desc: "Sitting on the rocks, mist rolling over the mountains behind us.", img: "IMG-20260307-WA0121.jpg", rot: "rotate-2" },
+            { year: "Maximum Potential", title: "Edge of the Universe", desc: "Taking in the breathtaking view from the rocky cliffs.", img: "1000114720.jpg", rot: "-rotate-1" },
+            { year: "Maximum Potential", title: "A Unified Theory", desc: "Scattered in the tea gardens, cheering for the best days of our lives.", img: "IMG-20260307-WA0139.jpg", rot: "rotate-3" }
         ];
 
         const timelineContainer = document.getElementById('timeline-container');
