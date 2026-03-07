@@ -40,22 +40,22 @@
             position: fixed; top: 0; left: 0; transform: translate(-50%, -50%);
             border-radius: 50%; z-index: 9999; pointer-events: none;
         }
-        .cursor-dot { width: 5px; height: 5px; background-color: var(--gold-accent); box-shadow: 0 0 10px var(--gold-accent); }
+        .cursor-dot { width: 6px; height: 6px; background-color: var(--gold-accent); box-shadow: 0 0 12px var(--gold-accent); }
         .cursor-outline {
-            width: 36px; height: 36px; border: 1px solid rgba(212, 175, 55, 0.4);
-            transition: width 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), 
-                        height 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), 
+            width: 40px; height: 40px; border: 1px solid rgba(212, 175, 55, 0.5);
+            transition: width 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), 
+                        height 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), 
                         background-color 0.3s, transform 0.1s, border-color 0.3s;
         }
         .cursor-hovering .cursor-outline {
-            width: 70px; height: 70px; background-color: rgba(212, 175, 55, 0.08); 
-            border-color: var(--gold-accent); backdrop-filter: blur(1px);
+            width: 80px; height: 80px; background-color: rgba(212, 175, 55, 0.1); 
+            border-color: var(--gold-accent); backdrop-filter: blur(2px);
         }
 
         /* --- TEXTURES & CANVASES --- */
         body::after {
             content: ""; position: fixed; top: 0; left: 0; width: 200%; height: 200%;
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.04'/%3E%3C/svg%3E");
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
             pointer-events: none; z-index: 100;
             animation: grainAnim 8s steps(10) infinite;
         }
@@ -68,9 +68,9 @@
         #magic-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
         
         #scroll-progress {
-            position: fixed; top: 0; left: 0; height: 3px; width: 0%;
+            position: fixed; top: 0; left: 0; height: 4px; width: 0%;
             background: linear-gradient(90deg, transparent, var(--gold-accent), #fff);
-            z-index: 10000; box-shadow: 0 0 15px var(--gold-glow);
+            z-index: 10000; box-shadow: 0 0 20px var(--gold-glow);
             transition: width 0.1s ease-out;
         }
 
@@ -80,15 +80,15 @@
             display: flex; flex-direction: column; align-items: center; justify-content: center;
             transition: opacity 1.2s ease-in-out, visibility 1.2s;
         }
-        .breathing-glow { animation: breath 2s ease-in-out infinite alternate; color: var(--gold-accent); text-shadow: 0 0 25px var(--gold-glow); }
-        @keyframes breath { 0% { transform: scale(0.95); opacity: 0.6; filter: blur(2px); } 100% { transform: scale(1.05); opacity: 1; filter: blur(0px); } }
+        .breathing-glow { animation: breath 2s ease-in-out infinite alternate; color: var(--gold-accent); text-shadow: 0 0 30px var(--gold-glow); }
+        @keyframes breath { 0% { transform: scale(0.95); opacity: 0.7; filter: blur(1px); } 100% { transform: scale(1.05); opacity: 1; filter: blur(0px); } }
 
         /* --- ANIMATIONS --- */
-        .fade-in-seq { opacity: 0; transform: translateY(30px); filter: blur(8px); }
-        .seq-1 { animation: magicFade 1.8s cubic-bezier(0.2, 0.8, 0.2, 1) 0.8s forwards; }
-        .seq-2 { animation: magicFade 1.8s cubic-bezier(0.2, 0.8, 0.2, 1) 1.2s forwards; }
-        .seq-3 { animation: magicFade 1.8s cubic-bezier(0.2, 0.8, 0.2, 1) 1.6s forwards; }
-        .seq-4 { animation: magicFade 1.8s cubic-bezier(0.2, 0.8, 0.2, 1) 2.2s forwards; }
+        .fade-in-seq { opacity: 0; transform: translateY(40px); filter: blur(10px); }
+        .seq-1 { animation: magicFade 2s cubic-bezier(0.2, 0.8, 0.2, 1) 0.8s forwards; }
+        .seq-2 { animation: magicFade 2s cubic-bezier(0.2, 0.8, 0.2, 1) 1.4s forwards; }
+        .seq-3 { animation: magicFade 2s cubic-bezier(0.2, 0.8, 0.2, 1) 2s forwards; }
+        .seq-4 { animation: magicFade 2s cubic-bezier(0.2, 0.8, 0.2, 1) 2.6s forwards; }
 
         @keyframes magicFade { to { opacity: 1; transform: translateY(0); filter: blur(0); } }
 
@@ -104,7 +104,7 @@
         .reveal-right { opacity: 0; transform: translateX(80px) rotate(4deg); filter: blur(6px); transition: all 1.4s cubic-bezier(0.25, 1, 0.5, 1); }
         .reveal.active, .reveal-left.active, .reveal-right.active { opacity: 1; transform: translate(0) scale(1) rotate(0); filter: blur(0); }
 
-        /* --- 3D POLAROIDS & PHOTO CORNERS --- */
+        /* --- 3D POLAROIDS UNCROPPED FIX --- */
         .polaroid-wrapper { perspective: 1500px; position: relative; padding: 25px; }
         
         .photo-corner { position: absolute; width: 30px; height: 30px; border: 3px solid #1a1510; z-index: 40; pointer-events: none; opacity: 0.85; border-radius: 2px; }
@@ -114,7 +114,8 @@
         .corner-br { bottom: 10px; right: 10px; border-left: none; border-top: none; }
 
         .polaroid {
-            background: var(--paper); padding: 16px 16px 80px 16px;
+            background: var(--paper); 
+            padding: 16px 16px 24px 16px; /* Dynamic padding to fit uncropped image */
             box-shadow: 0 40px 80px -20px rgba(0, 0, 0, 0.9), inset 0 0 20px rgba(0,0,0,0.06);
             transition: transform 0.15s ease-out;
             border-radius: 4px; transform-style: preserve-3d; will-change: transform; cursor: none;
@@ -128,13 +129,22 @@
         }
         .polaroid:hover::after { opacity: 1; }
 
-        .polaroid img { 
-            filter: contrast(1.08) saturate(1.1) sepia(0.08); 
-            transform: translateZ(25px); box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+        /* The Photo Frame that pops out in 3D */
+        .photo-frame {
+            transform: translateZ(25px); 
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
             border-radius: 3px; border: 1px solid rgba(0,0,0,0.15);
-            object-position: center top;
+            background: #EAE5D9; padding: 4px;
         }
-        .polaroid p { transform: translateZ(45px); text-shadow: 0 6px 12px rgba(0,0,0,0.2); color: #1a1a1a; }
+
+        /* The image itself - 100% uncropped */
+        .photo-frame img { 
+            width: 100%; height: auto; display: block;
+            filter: contrast(1.08) saturate(1.1) sepia(0.08); 
+            border-radius: 2px;
+        }
+        
+        .polaroid p { transform: translateZ(45px); text-shadow: 0 6px 12px rgba(0,0,0,0.2); color: #1a1a1a; margin-top: 1.5rem; }
 
         /* --- STICKY NOTES & BUTTONS --- */
         .sticky-note {
@@ -485,40 +495,37 @@
 
         initParticles(); animateParticles();
 
-        // --- 6. INJECTING ALL YOUR SPECIFIC PHOTOS ---
+        // --- 6. EXACT FILENAMES FROM YOUR SCREENSHOT ---
         const photoData = [
-            // Chapter 1: The Foundation
+            // Chapter 1
             { year: "Chapter 1", title: "Classroom Chronicles", desc: "The legendary group selfies in uniform that disrupted the lectures.", img: "IMG-20260307-WA0156.jpg", rot: "-rotate-2" },
             { year: "Chapter 1", title: "Surviving the Syllabus", desc: "Trying to understand whatever was written on that blackboard.", img: "IMG-20260307-WA0095.jpg", rot: "rotate-2" },
             { year: "Chapter 1", title: "First Selfies", desc: "Smiles, perfect lighting, and the start of a beautiful journey.", img: "IMG-20260307-WA0061.jpg", rot: "-rotate-1" },
             { year: "Chapter 1", title: "Finding Our Tribe", desc: "Everyone together. The faces we will absolutely never forget.", img: "IMG-20260307-WA0103.jpg", rot: "rotate-2" },
-            { year: "Chapter 1", title: "Basking in Memories", desc: "Taking a break under the bright sun and making every second count.", img: "1000114718.jpg", rot: "-rotate-2" },
             
-            // Chapter 2: Brotherhood & Shenanigans
+            // Chapter 2
             { year: "Chapter 2", title: "Physics Dept Memories", desc: "The boys holding down the fort at desk MGC-PHY-D30.", img: "IMG-20260307-WA0092.jpg", rot: "rotate-1" },
             { year: "Chapter 2", title: "Lab Shenanigans", desc: "Using the computer lab webcam for the most important tasks.", img: "IMG-20260307-WA0093.jpg", rot: "-rotate-3" },
-            { year: "Chapter 2", title: "Circle of Trust", desc: "Looking down at the camera, but always looking up to each other.", img: "1000114717.jpg", rot: "rotate-2" },
             { year: "Chapter 2", title: "Under the Shade", desc: "Chilling outdoors, enjoying the campus breeze and endless talks.", img: "IMG-20260307-WA0101.jpg", rot: "-rotate-2" },
             { year: "Chapter 2", title: "The Boys", desc: "Standing together in the sun, making memories.", img: "IMG-20260307-WA0127.jpg", rot: "rotate-1" },
             { year: "Chapter 2", title: "Squad Goals", desc: "Another legendary downward circle selfie.", img: "IMG-20260307-WA0119.jpg", rot: "-rotate-1" },
 
-            // Chapter 3: Celebrations
+            // Chapter 3
             { year: "Chapter 3", title: "Traditional Days", desc: "Dressed in red and white, looking our absolute best for Onam.", img: "IMG-20260307-WA0149.jpg", rot: "rotate-2" },
             { year: "Chapter 3", title: "Secret Santa", desc: "Cake cutting and Merry Christmas wishes in the classroom.", img: "IMG-20260307-WA0100.jpg", rot: "-rotate-1" },
             { year: "Chapter 3", title: "Christmas on Campus", desc: "Festive vibes and pictures wrapped around the Christmas tree.", img: "IMG-20260307-WA0078.jpg", rot: "rotate-3" },
             { year: "Chapter 3", title: "The Brotherhood", desc: "The boys sitting out by the Management block.", img: "IMG-20260307-WA0109.jpg", rot: "-rotate-2" },
             { year: "Chapter 3", title: "The Whole Gang", desc: "Squeezing everyone into one massive classroom selfie.", img: "IMG-20260307-WA0107.jpg", rot: "rotate-1" },
 
-            // Chapter 4: The Grand Finale
+            // Chapter 4
             { year: "The Finale", title: "To the Mountains", desc: "Escaping the campus for the beautiful, rocky green hills.", img: "IMG-20260307-WA0144.jpg", rot: "-rotate-3" },
-            { year: "The Finale", title: "Above the Clouds", desc: "Gathered on the viewing deck, surrounded by the mist.", img: "IMG-20260307-WA0122.jpg", rot: "rotate-2" },
-            { year: "The Finale", title: "Picture Perfect", desc: "Beautiful smiles amidst the endless green tea estates.", img: "IMG-20260307-WA0148(1).jpg", rot: "-rotate-1" },
+            { year: "The Finale", title: "Picture Perfect", desc: "Beautiful smiles amidst the endless green tea estates.", img: "IMG-20260307-WA0148(1).jpg", rot: "rotate-2" },
+            { year: "The Finale", title: "Brothers in Arms", desc: "Posing like absolute bosses in the middle of nowhere.", img: "IMG-20260307-WA0137.jpg", rot: "-rotate-1" },
             { year: "The Finale", title: "Golden Hour Girls", desc: "Creating the kind of memories that last a lifetime.", img: "IMG-20260307-WA0129(1).jpg", rot: "rotate-2" },
-            { year: "The Finale", title: "Brothers in Arms", desc: "Posing like absolute bosses in the middle of nowhere.", img: "IMG-20260307-WA0137.jpg", rot: "-rotate-2" },
-            { year: "The Finale", title: "Candid Chaos", desc: "Why take a normal picture when you can do this?", img: "IMG-20260307-WA0138.jpg", rot: "rotate-1" },
+            { year: "The Finale", title: "Candid Chaos", desc: "Why take a normal picture when you can do this?", img: "IMG-20260307-WA0138.jpg", rot: "-rotate-2" },
+            { year: "The Finale", title: "Above the Clouds", desc: "Gathered on the viewing deck, surrounded by the mist.", img: "IMG-20260307-WA0122.jpg", rot: "rotate-1" },
             { year: "The Finale", title: "Close-up in the Clouds", desc: "The wind was freezing, but the smiles were warm.", img: "IMG-20260307-WA0123.jpg", rot: "-rotate-2" },
             { year: "The Finale", title: "Conquering the Heights", desc: "Sitting on the rocks, mist rolling over the mountains behind us.", img: "IMG-20260307-WA0121.jpg", rot: "rotate-2" },
-            { year: "The Finale", title: "Edge of the World", desc: "Taking in the breathtaking view from the rocky cliffs.", img: "1000114720.jpg", rot: "-rotate-1" },
             { year: "The Finale", title: "One Big Family", desc: "Scattered in the tea gardens, cheering for the best days of our lives.", img: "IMG-20260307-WA0139.jpg", rot: "rotate-3" }
         ];
 
@@ -548,11 +555,12 @@
                         <div class="photo-corner corner-bl"></div>
                         <div class="photo-corner corner-br"></div>
                         
-                        <div class="polaroid transform ${item.rot} w-80 md:w-[26rem] cursor-none hoverable">
-                            <div class="aspect-[4/3] overflow-hidden bg-[#EAE5D9] mb-8 pointer-events-none border border-black/10">
-                                <img src="${item.img}" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\\'flex flex-col items-center justify-center h-full w-full bg-[#1a1510] text-[#d4af37] border border-[#d4af37]/30\\'><i class=\\'fa-solid fa-image text-4xl mb-3\\'></i><span class=\\'text-sm uppercase tracking-widest font-serif-title\\'>Image Missing</span></div>';" alt="${item.title}" loading="lazy" class="w-full h-full object-cover">
+                        <div class="polaroid transform ${item.rot} w-[85vw] max-w-md cursor-none hoverable">
+                            <!-- Removed forced ratio & cropping! Image scales naturally -->
+                            <div class="photo-frame pointer-events-none">
+                                <img src="${item.img}" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\\'flex flex-col items-center justify-center h-48 w-full bg-[#1a1510] text-[#d4af37] border border-[#d4af37]/30\\'><i class=\\'fa-solid fa-image text-4xl mb-3\\'></i><span class=\\'text-xs uppercase tracking-widest font-serif-title text-center\\'>Image Missing<br>Check File Name</span></div>';" alt="${item.title}" loading="lazy">
                             </div>
-                            <p class="font-signature text-4xl md:text-5xl text-[#1a1a1a] text-center pt-2 pointer-events-none">${item.title}</p>
+                            <p class="font-signature text-4xl md:text-5xl text-[#1a1a1a] text-center mt-6 pointer-events-none">${item.title}</p>
                         </div>
                     </div>
                 </div>
@@ -723,5 +731,3 @@
     </script>
 </body>
 </html>
-
-
