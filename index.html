@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Farewell Seniors | Class of 2026</title>
+    <title>Farewell Seniors | Physics Class of 2026</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Lora:ital,wght@0,400;0,500;1,400&family=Nothing+You+Could+Do&family=Caveat:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -11,7 +11,7 @@
     <style>
         /* --- CORE THEME & CURSOR --- */
         :root {
-            --bg-dark: #0d0a08;
+            --bg-dark: #090706; /* Slightly deeper for cinematic contrast */
             --text-light: #f4eee0;
             --gold-accent: #d4af37;
             --gold-glow: rgba(212, 175, 55, 0.4);
@@ -53,9 +53,12 @@
         }
 
         /* --- TEXTURES & CANVASES --- */
+        /* Cinematic Vignette & Film Grain Overlay */
         body::after {
             content: ""; position: fixed; top: 0; left: 0; width: 200%; height: 200%;
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
+            background-image: 
+                radial-gradient(circle at 25% 25%, transparent 40%, rgba(0,0,0,0.6) 100%), /* Vignette */
+                url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
             pointer-events: none; z-index: 100;
             animation: grainAnim 8s steps(10) infinite;
         }
@@ -100,26 +103,36 @@
         @keyframes flash { 0% { opacity: 0.9; transform: scale(0.95); } 100% { opacity: 0; transform: scale(1.05); } }
 
         .reveal { opacity: 0; transform: translateY(80px) scale(0.95); filter: blur(6px); transition: all 1.4s cubic-bezier(0.25, 1, 0.5, 1); }
-        .reveal-left { opacity: 0; transform: translateX(-80px) rotate(-4deg); filter: blur(6px); transition: all 1.4s cubic-bezier(0.25, 1, 0.5, 1); }
-        .reveal-right { opacity: 0; transform: translateX(80px) rotate(4deg); filter: blur(6px); transition: all 1.4s cubic-bezier(0.25, 1, 0.5, 1); }
+        .reveal-left { opacity: 0; transform: translateX(-40px) rotate(-4deg); filter: blur(6px); transition: all 1.4s cubic-bezier(0.25, 1, 0.5, 1); }
+        .reveal-right { opacity: 0; transform: translateX(40px) rotate(4deg); filter: blur(6px); transition: all 1.4s cubic-bezier(0.25, 1, 0.5, 1); }
         .reveal.active, .reveal-left.active, .reveal-right.active { opacity: 1; transform: translate(0) scale(1) rotate(0); filter: blur(0); }
 
+        @media (min-width: 768px) {
+            .reveal-left { transform: translateX(-80px) rotate(-4deg); }
+            .reveal-right { transform: translateX(80px) rotate(4deg); }
+        }
+
         /* --- 3D POLAROIDS UNCROPPED FIX --- */
-        .polaroid-wrapper { perspective: 1500px; position: relative; padding: 25px; }
+        .polaroid-wrapper { perspective: 1500px; position: relative; padding: 15px; }
+        @media (min-width: 768px) { .polaroid-wrapper { padding: 25px; } }
         
-        .photo-corner { position: absolute; width: 30px; height: 30px; border: 3px solid #1a1510; z-index: 40; pointer-events: none; opacity: 0.85; border-radius: 2px; }
-        .corner-tl { top: 10px; left: 10px; border-right: none; border-bottom: none; }
-        .corner-tr { top: 10px; right: 10px; border-left: none; border-bottom: none; }
-        .corner-bl { bottom: 10px; left: 10px; border-right: none; border-top: none; }
-        .corner-br { bottom: 10px; right: 10px; border-left: none; border-top: none; }
+        .photo-corner { position: absolute; width: 25px; height: 25px; border: 3px solid #1a1510; z-index: 40; pointer-events: none; opacity: 0.85; border-radius: 2px; }
+        @media (min-width: 768px) { .photo-corner { width: 30px; height: 30px; } }
+        .corner-tl { top: 5px; left: 5px; border-right: none; border-bottom: none; }
+        .corner-tr { top: 5px; right: 5px; border-left: none; border-bottom: none; }
+        .corner-bl { bottom: 5px; left: 5px; border-right: none; border-top: none; }
+        .corner-br { bottom: 5px; right: 5px; border-left: none; border-top: none; }
 
         .polaroid {
             background: var(--paper); 
-            padding: 16px 16px 24px 16px; /* Dynamic padding to fit uncropped image */
-            box-shadow: 0 40px 80px -20px rgba(0, 0, 0, 0.9), inset 0 0 20px rgba(0,0,0,0.06);
+            padding: 12px 12px 20px 12px; 
+            box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.9), inset 0 0 10px rgba(0,0,0,0.06);
             transition: transform 0.15s ease-out;
             border-radius: 4px; transform-style: preserve-3d; will-change: transform; cursor: none;
             background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.08'/%3E%3C/svg%3E");
+        }
+        @media (min-width: 768px) {
+            .polaroid { padding: 16px 16px 24px 16px; box-shadow: 0 40px 80px -20px rgba(0, 0, 0, 0.9), inset 0 0 20px rgba(0,0,0,0.06); }
         }
         
         .polaroid::after {
@@ -129,58 +142,81 @@
         }
         .polaroid:hover::after { opacity: 1; }
 
-        /* The Photo Frame that pops out in 3D */
         .photo-frame {
-            transform: translateZ(25px); 
-            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+            transform: translateZ(15px); 
+            box-shadow: 0 10px 20px rgba(0,0,0,0.4);
             border-radius: 3px; border: 1px solid rgba(0,0,0,0.15);
             background: #EAE5D9; padding: 4px;
         }
+        @media (min-width: 768px) {
+            .photo-frame { transform: translateZ(25px); box-shadow: 0 20px 40px rgba(0,0,0,0.5); }
+        }
 
-        /* The image itself - 100% uncropped */
         .photo-frame img { 
             width: 100%; height: auto; display: block;
             filter: contrast(1.08) saturate(1.1) sepia(0.08); 
             border-radius: 2px;
         }
         
-        .polaroid p { transform: translateZ(45px); text-shadow: 0 6px 12px rgba(0,0,0,0.2); color: #1a1a1a; margin-top: 1.5rem; }
+        .polaroid p { transform: translateZ(25px); text-shadow: 0 4px 8px rgba(0,0,0,0.15); color: #1a1a1a; margin-top: 1rem; }
+        @media (min-width: 768px) {
+            .polaroid p { transform: translateZ(45px); text-shadow: 0 6px 12px rgba(0,0,0,0.2); margin-top: 1.5rem; }
+        }
 
         /* --- STICKY NOTES & BUTTONS --- */
         .sticky-note {
-            padding: 30px; box-shadow: 6px 20px 40px rgba(0,0,0,0.5);
-            position: relative; border-bottom-right-radius: 30px 5px;
+            padding: 20px; box-shadow: 4px 10px 20px rgba(0,0,0,0.4);
+            position: relative; border-bottom-right-radius: 20px 4px;
             transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             color: #1a1a1a;
             background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
         }
+        @media (min-width: 768px) {
+            .sticky-note { padding: 30px; box-shadow: 6px 20px 40px rgba(0,0,0,0.5); border-bottom-right-radius: 30px 5px; }
+        }
         .sticky-note::before {
-            content: ''; position: absolute; top: 12px; left: 50%; transform: translateX(-50%);
-            width: 14px; height: 14px; border-radius: 50%;
+            content: ''; position: absolute; top: 10px; left: 50%; transform: translateX(-50%);
+            width: 12px; height: 12px; border-radius: 50%;
             background: radial-gradient(circle at 30% 30%, #fca5a5, #dc2626, #991b1b);
             box-shadow: 2px 4px 8px rgba(0,0,0,0.4), inset -2px -2px 4px rgba(0,0,0,0.3);
             z-index: 10;
         }
         .sticky-note::after {
-            content: ''; position: absolute; bottom: 0; right: 0; width: 35px; height: 35px;
+            content: ''; position: absolute; bottom: 0; right: 0; width: 25px; height: 25px;
             background: linear-gradient(to top left, transparent 50%, rgba(0,0,0,0.1) 50%); border-bottom-right-radius: 5px;
+        }
+        @media (min-width: 768px) {
+            .sticky-note::after { width: 35px; height: 35px; }
         }
 
         .glow-button { position: relative; border-radius: 50px; background: var(--gold-accent); color: var(--bg-dark); }
         .glow-button::before {
             content: ''; position: absolute; inset: -4px;
             background: linear-gradient(45deg, #d4af37, #fff0bc, #b8860b, #d4af37);
-            border-radius: 50px; z-index: -1; filter: blur(18px); opacity: 0.6; transition: opacity 0.5s ease;
+            border-radius: 50px; z-index: -1; filter: blur(12px); opacity: 0.6; transition: opacity 0.5s ease;
             animation: pulse-border 4s infinite linear;
         }
+        @media (min-width: 768px) { .glow-button::before { filter: blur(18px); } }
         .glow-button:hover::before { opacity: 1; }
-        @keyframes pulse-border { 0% { filter: hue-rotate(0deg) blur(18px); } 100% { filter: hue-rotate(360deg) blur(18px); } }
+        @keyframes pulse-border { 0% { filter: hue-rotate(0deg) blur(15px); } 100% { filter: hue-rotate(360deg) blur(15px); } }
 
-        .ruled-paper {
+        /* Physics Theme: Vintage Graph Paper for Guestbook */
+        .graph-paper {
             background-color: #fff;
-            background-image: linear-gradient(transparent 95%, #cbd5e1 95%);
-            background-size: 100% 3.5rem;
-            line-height: 3.5rem;
+            background-image: 
+                linear-gradient(#e5e7eb 1px, transparent 1px),
+                linear-gradient(90deg, #e5e7eb 1px, transparent 1px);
+            background-size: 25px 25px;
+            line-height: 25px;
+            padding-top: 5px;
+        }
+        @media (min-width: 768px) {
+            .graph-paper { background-size: 35px 35px; line-height: 35px; padding-top: 8px; }
+        }
+        
+        /* Sine wave SVG path styling */
+        .sine-wave {
+            width: 100%; height: 30px; stroke: var(--gold-accent); stroke-width: 2; fill: none; opacity: 0.5;
         }
     </style>
 </head>
@@ -191,14 +227,15 @@
         <source src="background-song.mp3" type="audio/mpeg">
     </audio>
 
-    <button id="music-toggle-btn" class="hoverable fixed bottom-8 right-8 z-[5000] w-14 h-14 rounded-full bg-[#14100d]/90 border border-[#d4af37]/50 backdrop-blur-xl flex items-center justify-center text-[#d4af37] transition-all duration-500 hover:scale-110 shadow-[0_0_25px_rgba(212,175,55,0.3)] opacity-0 hidden">
-        <i id="music-icon" class="fa-solid fa-music text-xl"></i>
+    <button id="music-toggle-btn" class="hoverable fixed bottom-6 right-6 md:bottom-10 md:right-10 z-[5000] px-4 py-2 md:px-5 md:py-3 rounded-full bg-[#14100d]/90 border border-[#d4af37]/50 backdrop-blur-xl flex items-center justify-center text-[#d4af37] transition-all duration-500 hover:scale-105 shadow-[0_0_25px_rgba(212,175,55,0.4)] opacity-0 hidden group">
+        <i id="music-icon" class="fa-solid fa-music text-base md:text-lg mr-2 animate-bounce"></i>
+        <span id="music-text" class="font-serif-title text-[10px] md:text-xs tracking-widest uppercase font-bold">Play Music</span>
     </button>
 
     <!-- PRELOADER -->
     <div id="preloader">
-        <i class="fa-solid fa-film text-7xl mb-8 breathing-glow"></i>
-        <h2 class="font-serif-title text-[#f4eee0] text-2xl md:text-3xl tracking-[0.4em] font-light uppercase text-center">Curating<br>Memories</h2>
+        <i class="fa-solid fa-atom text-6xl md:text-7xl mb-6 md:mb-8 breathing-glow"></i>
+        <h2 class="font-serif-title text-[#f4eee0] text-xl md:text-3xl tracking-[0.4em] md:tracking-[0.5em] font-light uppercase text-center">Calculating<br>Trajectory...</h2>
     </div>
 
     <!-- CUSTOM CURSOR -->
@@ -217,84 +254,93 @@
         <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[90vw] h-[90vw] md:w-[50vw] md:h-[50vw] bg-[#d4af37] rounded-full blur-[180px] opacity-10 pointer-events-none"></div>
 
         <div class="max-w-5xl mx-auto relative z-20">
-            <p class="fade-in-seq seq-1 text-[#d4af37] tracking-[0.6em] uppercase text-sm md:text-base mb-6 font-semibold drop-shadow-lg">A Cinematic Tribute</p>
+            <p class="fade-in-seq seq-1 text-[#d4af37] tracking-[0.4em] md:tracking-[0.6em] uppercase text-xs md:text-sm mb-4 md:mb-6 font-semibold drop-shadow-lg">A Tribute from 1st Year Physics</p>
             
-            <div class="relative inline-block fade-in-seq seq-2 mb-8">
-                <h1 class="text-7xl md:text-9xl lg:text-[10rem] font-bold tracking-tight font-serif-title text-[#f4eee0] drop-shadow-[0_15px_40px_rgba(0,0,0,0.9)] relative z-10 hoverable">
-                    Class of <span class="text-[#d4af37] italic font-handwriting pr-4">2026</span>
+            <div class="relative inline-block fade-in-seq seq-2 mb-6 md:mb-8">
+                <h1 class="text-6xl sm:text-7xl md:text-9xl lg:text-[10rem] font-bold tracking-tight font-serif-title text-[#f4eee0] drop-shadow-[0_15px_40px_rgba(0,0,0,0.9)] relative z-10 hoverable leading-none">
+                    Class of <br class="block sm:hidden"><span class="text-[#d4af37] italic font-handwriting pr-2 md:pr-4">2026</span>
                 </h1>
             </div>
             
-            <div class="mb-16 px-4">
-                <p class="fade-in-seq seq-3 text-gray-300 text-xl md:text-3xl max-w-3xl mx-auto italic font-light leading-relaxed">
-                    "We didn't realize we were making memories. We just knew we were having the time of our lives."
+            <div class="mb-12 md:mb-16 px-2 md:px-4">
+                <p class="fade-in-seq seq-3 text-gray-300 text-base sm:text-lg md:text-3xl max-w-3xl mx-auto italic font-light leading-relaxed">
+                    "Energy is always conserved, but the memories we created here will only continue to expand."
                 </p>
             </div>
             
-            <div class="fade-in-seq seq-4 mt-6">
-                <button id="start-journey-btn" class="glow-button hoverable group relative inline-flex items-center justify-center gap-5 px-14 py-6 font-serif-title text-xl transition-transform duration-500 hover:-translate-y-1 z-20 shadow-2xl">
-                    <span class="tracking-widest uppercase text-sm md:text-base font-bold">Unveil The Journey</span>
-                    <i class="fa-solid fa-arrow-down group-hover:translate-y-2 transition-transform duration-500 text-lg"></i>
+            <div class="fade-in-seq seq-4 mt-4 md:mt-6">
+                <button id="start-journey-btn" class="glow-button hoverable group relative inline-flex items-center justify-center gap-4 md:gap-5 px-8 py-4 md:px-14 md:py-6 font-serif-title text-base md:text-xl transition-transform duration-500 hover:-translate-y-1 z-20 shadow-2xl">
+                    <span class="tracking-widest uppercase text-xs sm:text-sm md:text-base font-bold">Unveil The Spectrum</span>
+                    <i class="fa-solid fa-arrow-down group-hover:translate-y-2 transition-transform duration-500 text-sm md:text-lg"></i>
                 </button>
             </div>
         </div>
     </header>
 
     <!-- TIMELINE SECTION -->
-    <section id="memories-section" class="relative max-w-7xl mx-auto px-4 py-32 opacity-0 translate-y-20 transition-all duration-1000 ease-out z-10">
-        <div class="text-center mb-48 reveal">
-            <h2 class="text-5xl md:text-7xl font-bold text-white mb-8 font-serif-title relative inline-block drop-shadow-2xl">
+    <section id="memories-section" class="relative max-w-7xl mx-auto px-4 py-24 md:py-32 opacity-0 translate-y-20 transition-all duration-1000 ease-out z-10">
+        <div class="text-center mb-24 md:mb-48 reveal">
+            <h2 class="text-4xl md:text-5xl lg:text-7xl font-bold text-white mb-6 md:mb-8 font-serif-title relative inline-block drop-shadow-2xl">
                 The Golden Archives
             </h2>
-            <div class="w-32 h-1 bg-gradient-to-r from-transparent via-[#d4af37] to-transparent mx-auto opacity-60"></div>
+            <!-- Decorative Physics Sine Wave Divider -->
+            <svg class="sine-wave mx-auto" viewBox="0 0 200 30" xmlns="http://www.w3.org/2000/svg">
+                <path d="M 0,15 Q 25,0 50,15 T 100,15 T 150,15 T 200,15" />
+            </svg>
         </div>
         
-        <div class="hidden md:block absolute left-1/2 top-64 bottom-0 w-px bg-gradient-to-b from-[#d4af37] via-[#5c4a30] to-transparent -translate-x-1/2 z-0 opacity-40"></div>
+        <!-- Glowing Photon Beam Timeline -->
+        <div class="hidden md:block absolute left-1/2 top-48 bottom-0 w-[2px] bg-gradient-to-b from-transparent via-[#d4af37] to-transparent -translate-x-1/2 z-0 opacity-50 shadow-[0_0_15px_#d4af37]"></div>
         
-        <div id="timeline-container" class="w-full flex flex-col gap-y-56 md:gap-y-72 relative z-10"></div>
+        <div id="timeline-container" class="w-full flex flex-col gap-y-32 md:gap-y-56 lg:gap-y-72 relative z-10"></div>
+    </section>
+
+    <!-- DEDICATED TRIBUTE SECTION -->
+    <section class="py-16 md:py-24 relative bg-[#0e0a08] border-y border-[#d4af37]/20 z-10 shadow-[0_0_80px_rgba(0,0,0,0.9)] mt-12 md:mt-20">
+        <div class="max-w-4xl mx-auto text-center px-6 reveal relative">
+            <i class="fa-solid fa-quote-left text-3xl md:text-5xl text-[#d4af37]/30 mb-6 md:mb-8 absolute -top-8 md:-top-12 left-1/2 transform -translate-x-1/2"></i>
+            <h3 class="text-3xl md:text-5xl lg:text-6xl font-serif-title text-[#f4eee0] mb-6 md:mb-8 leading-tight">From the first-year physics students</h3>
+            <p class="text-gray-400 text-lg md:text-2xl font-light italic max-w-3xl mx-auto leading-relaxed mb-8 md:mb-12">
+                Thank you for guiding us, inspiring us, and showing us the right trajectory. We wish you nothing but maximum potential in all your future endeavors.
+            </p>
+            <div class="inline-block transform -rotate-2">
+                <p class="text-[#d4af37] font-signature text-4xl sm:text-5xl md:text-6xl drop-shadow-md">
+                    Created with <i class="fa-solid fa-heart text-red-800 mx-1 md:mx-2 animate-pulse text-2xl md:text-4xl"></i> by Aravind O.K.
+                </p>
+            </div>
+        </div>
     </section>
 
     <!-- VIDEO REVEAL SECTION -->
-    <section class="py-48 relative bg-[#050403] text-[#FDFBF7] mt-32 z-10 shadow-[0_-30px_120px_rgba(0,0,0,1)] border-y border-[#2a2218]">
+    <section class="py-32 md:py-48 relative bg-[#060403] text-[#FDFBF7] z-10 shadow-[0_-30px_120px_rgba(0,0,0,1)] border-b border-[#2a2218]">
         <div class="max-w-4xl mx-auto text-center px-4 reveal relative">
-            <div class="w-28 h-28 mx-auto bg-[#14100d] rounded-full flex items-center justify-center mb-12 shadow-[0_0_50px_rgba(212,175,55,0.2)] border border-[#d4af37]/40 relative overflow-hidden group hoverable cursor-pointer" onclick="openVideo()">
+            <div class="w-20 h-20 md:w-28 md:h-28 mx-auto bg-[#14100d] rounded-full flex items-center justify-center mb-8 md:mb-12 shadow-[0_0_50px_rgba(212,175,55,0.2)] border border-[#d4af37]/40 relative overflow-hidden group hoverable cursor-pointer" onclick="openVideo()">
                 <div class="absolute inset-0 bg-gradient-to-tr from-[#d4af37] to-transparent opacity-0 group-hover:opacity-30 transition-opacity duration-500"></div>
-                <i class="fa-solid fa-play text-5xl text-[#d4af37] group-hover:scale-110 transition-transform duration-700 ml-2"></i>
+                <i class="fa-solid fa-play text-3xl md:text-5xl text-[#d4af37] group-hover:scale-110 transition-transform duration-700 ml-1 md:ml-2"></i>
             </div>
-            <h2 class="text-6xl md:text-8xl font-bold mb-8 font-serif-title text-white">The Final Roll</h2>
-            <p class="text-gray-400 mb-16 text-xl md:text-2xl italic font-light max-w-2xl mx-auto leading-relaxed">
-                Dim the lights. Press play. Watch the absolute best years of our lives unfold right before your eyes.
+            <h2 class="text-4xl sm:text-5xl md:text-8xl font-bold mb-6 md:mb-8 font-serif-title text-white">The Final Frequency</h2>
+            <p class="text-gray-400 mb-12 md:mb-16 text-base sm:text-lg md:text-2xl italic font-light max-w-2xl mx-auto leading-relaxed">
+                Dim the lights. Press play. Watch the absolute best years of our lives unfold in perfect motion.
             </p>
             
-            <button onclick="openVideo()" class="glow-button hoverable group relative inline-flex items-center justify-center gap-4 px-16 py-6 text-[#0d0a08] font-bold text-xl overflow-hidden transition-all duration-300 hover:-translate-y-1 rounded-full">
-                <span class="tracking-widest uppercase text-sm md:text-base font-serif-title">Watch Farewell Video</span>
+            <button onclick="openVideo()" class="glow-button hoverable group relative inline-flex items-center justify-center gap-3 md:gap-4 px-8 py-4 md:px-16 md:py-6 text-[#090706] font-bold text-base md:text-xl overflow-hidden transition-all duration-300 hover:-translate-y-1 rounded-full">
+                <span class="tracking-widest uppercase text-xs md:text-sm font-serif-title">Watch Farewell Video</span>
             </button>
         </div>
     </section>
 
     <!-- MEMORY WALL -->
-    <section id="memory-wall" class="py-48 relative max-w-7xl mx-auto px-4 z-10">
-        <div class="text-center mb-32 reveal relative">
-            <h2 class="text-5xl md:text-7xl font-bold text-white mb-6 font-serif-title drop-shadow-xl">The Memory Wall</h2>
-            <p class="text-[#d4af37] font-handwriting text-4xl md:text-5xl transform -rotate-2 drop-shadow-md">Messages from the heart...</p>
+    <section id="memory-wall" class="py-24 md:py-48 relative max-w-7xl mx-auto px-4 z-10">
+        <div class="text-center mb-20 md:mb-32 reveal relative">
+            <h2 class="text-4xl sm:text-5xl md:text-7xl font-bold text-white mb-4 md:mb-6 font-serif-title drop-shadow-xl">The Memory Wall</h2>
+            <p class="text-[#d4af37] font-handwriting text-3xl md:text-5xl transform -rotate-2 drop-shadow-md">Variables of the heart...</p>
         </div>
-        <div id="notes-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-14 p-4"></div>
+        <div id="notes-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-14 p-2 md:p-4"></div>
     </section>
 
-    <!-- FOOTER TRIBUTE -->
-    <footer class="py-16 relative z-10 bg-[#080605] border-t border-[#2a2218] text-center">
-        <div class="max-w-4xl mx-auto px-4 reveal relative">
-            <i class="fa-solid fa-atom text-4xl text-[#d4af37] mb-6 opacity-80 hover:rotate-180 transition-transform duration-1000"></i>
-            <h3 class="text-2xl md:text-4xl font-serif-title text-white mb-4">A tribute from the first-year physics students.</h3>
-            <p class="text-gray-500 font-light text-xs md:text-sm tracking-[0.3em] uppercase mt-8">
-                Created with <i class="fa-solid fa-heart text-[#d4af37] mx-1 animate-pulse"></i> by <span class="text-[#d4af37] font-bold">Aravind O.K.</span>
-            </p>
-        </div>
-    </footer>
-
     <!-- VIDEO MODAL -->
-    <div id="video-modal" class="fixed inset-0 z-[150] bg-[#080605]/98 backdrop-blur-2xl hidden flex-col items-center justify-center p-4 md:p-12 opacity-0 transition-opacity duration-500">
-        <button onclick="closeVideoAndShowPopup()" class="hoverable absolute top-6 right-6 md:top-10 md:right-10 text-gray-500 hover:text-[#d4af37] hover:rotate-90 transition-all duration-300 text-5xl md:text-6xl z-50">
+    <div id="video-modal" class="fixed inset-0 z-[150] bg-[#060403]/98 backdrop-blur-2xl hidden flex-col items-center justify-center p-4 md:p-12 opacity-0 transition-opacity duration-500">
+        <button onclick="closeVideoAndShowPopup()" class="hoverable absolute top-4 right-4 md:top-10 md:right-10 text-gray-500 hover:text-[#d4af37] hover:rotate-90 transition-all duration-300 text-4xl md:text-6xl z-50">
             <i class="fa-solid fa-xmark"></i>
         </button>
         <div class="w-full max-w-7xl aspect-video bg-black rounded-sm overflow-hidden shadow-[0_0_150px_rgba(212,175,55,0.2)] relative scale-95 transition-transform duration-500 border border-[#d4af37]/20" id="video-container">
@@ -307,29 +353,29 @@
 
     <!-- NOTE POP-UP MODAL -->
     <div id="guestbook-modal" class="fixed inset-0 z-[200] bg-black/90 backdrop-blur-xl hidden flex-col items-center justify-center p-4 opacity-0 transition-opacity duration-700">
-        <div class="popup-content bg-[#FDFBF7] p-8 md:p-16 shadow-[0_40px_120px_rgba(212,175,55,0.3)] max-w-2xl w-full transform scale-95 translate-y-10 transition-all duration-700 relative rounded-sm text-[#0c0a09]">
-            <button onclick="closeGuestbookPopup()" class="hoverable absolute top-6 right-6 text-gray-400 hover:text-black hover:rotate-90 transition-all duration-300 text-4xl">
+        <div class="popup-content bg-[#FDFBF7] p-6 md:p-16 shadow-[0_40px_120px_rgba(212,175,55,0.3)] max-w-2xl w-full transform scale-95 translate-y-10 transition-all duration-700 relative rounded-sm text-[#090706] max-h-[90vh] overflow-y-auto custom-scrollbar">
+            <button onclick="closeGuestbookPopup()" class="hoverable absolute top-4 right-4 md:top-6 md:right-6 text-gray-400 hover:text-black hover:rotate-90 transition-all duration-300 text-3xl md:text-4xl">
                 <i class="fa-solid fa-xmark"></i>
             </button>
-            <div class="text-center mb-10 relative">
-                <i class="fa-solid fa-pen-nib text-5xl text-[#d4af37] mb-6 transform hover:rotate-12 transition-transform"></i>
-                <h2 class="text-4xl font-bold font-serif-title mb-2">Wait, before you go...</h2>
-                <p class="text-gray-600 italic font-light text-base md:text-lg">Pin a farewell note to the memory wall.</p>
+            <div class="text-center mb-6 md:mb-10 relative mt-4 md:mt-0">
+                <i class="fa-solid fa-pen-nib text-4xl md:text-5xl text-[#d4af37] mb-4 md:mb-6 transform hover:rotate-12 transition-transform"></i>
+                <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold font-serif-title mb-2">Wait, before you go...</h2>
+                <p class="text-gray-600 italic font-light text-sm md:text-lg">Pin your final equation to the memory wall.</p>
             </div>
-            <form id="popup-form" class="space-y-8">
+            <form id="popup-form" class="space-y-6 md:space-y-8">
                 <div>
                     <input type="text" id="pop-name" placeholder="Your Name & Year" required
-                        class="w-full bg-transparent border-b-2 border-gray-300 px-2 py-4 focus:outline-none focus:border-[#d4af37] transition-colors font-serif-title text-2xl text-black">
+                        class="w-full bg-transparent border-b-2 border-gray-300 px-2 py-3 md:py-4 focus:outline-none focus:border-[#d4af37] transition-colors font-serif-title text-lg md:text-2xl text-black">
                 </div>
                 <div class="relative mt-4">
                     <textarea id="pop-message" placeholder="Write your favourite memory or wish..." rows="4" required
-                        class="w-full bg-transparent border-none px-4 py-2 focus:outline-none transition-colors resize-none font-signature text-4xl md:text-5xl leading-relaxed text-black ruled-paper shadow-inner rounded-sm border border-gray-100"></textarea>
+                        class="w-full bg-transparent border-none px-2 md:px-4 py-2 focus:outline-none transition-colors resize-none font-signature text-2xl sm:text-3xl md:text-4xl text-black graph-paper shadow-inner rounded-sm border border-gray-200"></textarea>
                 </div>
-                <div class="flex flex-col md:flex-row gap-6 pt-6">
-                    <button type="submit" class="hoverable glow-button flex-1 py-5 transition-colors duration-300 font-serif-title tracking-widest uppercase text-sm rounded-full">
+                <div class="flex flex-col sm:flex-row gap-4 md:gap-6 pt-4 md:pt-6">
+                    <button type="submit" class="hoverable glow-button flex-1 py-4 md:py-5 transition-colors duration-300 font-serif-title tracking-widest uppercase text-xs md:text-sm rounded-full">
                         Pin to Wall
                     </button>
-                    <button type="button" onclick="closeGuestbookPopup()" class="hoverable flex-1 border border-gray-300 text-gray-500 font-bold py-5 hover:bg-gray-100 hover:text-black transition-all duration-300 font-serif-title tracking-widest uppercase text-sm rounded-full">
+                    <button type="button" onclick="closeGuestbookPopup()" class="hoverable flex-1 border border-gray-300 text-gray-500 font-bold py-4 md:py-5 hover:bg-gray-100 hover:text-black transition-all duration-300 font-serif-title tracking-widest uppercase text-xs md:text-sm rounded-full">
                         Skip
                     </button>
                 </div>
@@ -341,7 +387,11 @@
     <script>
         // --- 1. PRELOADER & MUSIC INIT ---
         const musicToggleBtn = document.getElementById('music-toggle-btn');
-        
+        const bgMusic = document.getElementById('bg-music');
+        const musicIcon = document.getElementById('music-icon');
+        const musicText = document.getElementById('music-text');
+        let isMusicPlaying = false;
+
         window.addEventListener('load', () => {
             const preloader = document.getElementById('preloader');
             setTimeout(() => {
@@ -355,30 +405,49 @@
         });
 
         // --- 2. AUDIO PLAYER LOGIC ---
-        const bgMusic = document.getElementById('bg-music');
-        const musicIcon = document.getElementById('music-icon');
-        let isMusicPlaying = false;
-
         function toggleMusic() {
             if (isMusicPlaying) {
                 bgMusic.pause();
-                musicIcon.classList.remove('fa-volume-up');
+                musicIcon.classList.remove('fa-volume-up', 'animate-bounce');
                 musicIcon.classList.add('fa-volume-xmark');
+                musicText.innerText = "Music Off";
             } else {
                 bgMusic.play().catch(e => console.log("Audio autoplay blocked, needs interaction first."));
                 musicIcon.classList.remove('fa-volume-xmark', 'fa-music');
-                musicIcon.classList.add('fa-volume-up');
+                musicIcon.classList.add('fa-volume-up', 'animate-bounce');
+                musicText.innerText = "Music On";
             }
             isMusicPlaying = !isMusicPlaying;
+            
+            if (isMusicPlaying) {
+                setTimeout(() => {
+                    musicText.style.display = 'none';
+                    musicToggleBtn.classList.remove('px-4', 'px-5');
+                    musicToggleBtn.classList.add('w-12', 'h-12', 'md:w-14', 'md:h-14');
+                    musicIcon.classList.remove('mr-2');
+                }, 3000);
+            }
         }
 
-        musicToggleBtn.addEventListener('click', toggleMusic);
+        musicToggleBtn.addEventListener('click', (e) => {
+            e.stopPropagation(); 
+            toggleMusic();
+        });
+
+        document.addEventListener('click', function initAudio() {
+            if (!isMusicPlaying) {
+                toggleMusic();
+            }
+            document.removeEventListener('click', initAudio);
+        }, { once: true });
+
 
         // --- 3. MAGNETIC CURSOR ---
         const cursorDot = document.querySelector('.cursor-dot');
         const cursorOutline = document.querySelector('.cursor-outline');
         
         window.addEventListener('mousemove', (e) => {
+            if(window.innerWidth <= 768) return; 
             cursorDot.style.left = e.clientX + 'px';
             cursorDot.style.top = e.clientY + 'px';
             
@@ -388,6 +457,7 @@
         });
 
         document.body.addEventListener('mouseover', (e) => {
+            if(window.innerWidth <= 768) return; 
             const hoverable = e.target.closest('.hoverable, button, .polaroid');
             if (hoverable) {
                 document.body.classList.add('cursor-hovering');
@@ -404,6 +474,7 @@
         });
         
         document.body.addEventListener('mouseout', (e) => {
+            if(window.innerWidth <= 768) return;
             if (e.target.closest('.hoverable, button, .polaroid')) {
                 document.body.classList.remove('cursor-hovering', 'cursor-magnetic');
                 cursorOutline.style.width = '40px';
@@ -477,7 +548,8 @@
 
         function initParticles() {
             particlesArray = [];
-            const numberOfParticles = (canvas.width * canvas.height) / 7000;
+            const density = window.innerWidth > 768 ? 7000 : 15000;
+            const numberOfParticles = (canvas.width * canvas.height) / density;
             for (let i = 0; i < numberOfParticles; i++) { particlesArray.push(new Particle()); }
         }
 
@@ -492,7 +564,8 @@
 
         function fireConfetti() {
             const confColors = ['#d4af37', '#fff0bc', '#ffffff', '#8c7326'];
-            for(let i = 0; i < 200; i++) {
+            const amount = window.innerWidth > 768 ? 200 : 100;
+            for(let i = 0; i < amount; i++) {
                 let p = new Particle();
                 p.isConfetti = true; p.size = Math.random() * 5 + 3;
                 p.x = canvas.width / 2; p.y = canvas.height;
@@ -506,38 +579,39 @@
 
         initParticles(); animateParticles();
 
-        // --- 6. EXACT FILENAMES FROM YOUR SCREENSHOT ---
+        // --- 6. PHYSICS-THEMED PHOTO COPY ---
         const photoData = [
-            // Chapter 1
-            { year: "Chapter 1", title: "Classroom Chronicles", desc: "The legendary group selfies in uniform that disrupted the lectures.", img: "IMG-20260307-WA0156.jpg", rot: "-rotate-2" },
-            { year: "Chapter 1", title: "Surviving the Syllabus", desc: "Trying to understand whatever was written on that blackboard.", img: "IMG-20260307-WA0095.jpg", rot: "rotate-2" },
-            { year: "Chapter 1", title: "First Selfies", desc: "Smiles, perfect lighting, and the start of a beautiful journey.", img: "IMG-20260307-WA0061.jpg", rot: "-rotate-1" },
-            { year: "Chapter 1", title: "Finding Our Tribe", desc: "Everyone together. The faces we will absolutely never forget.", img: "IMG-20260307-WA0103.jpg", rot: "rotate-2" },
+            // Chapter 1: The Ground State
+            { year: "The Ground State", title: "Classroom Chronicles", desc: "The legendary backbenchers who understood the chemistry of friendship better than the syllabus.", img: "photo1.jpg", rot: "-rotate-2" },
+            { year: "The Ground State", title: "Surviving the Syllabus", desc: "Derivations on the board, but our minds were already calculating the escape velocity.", img: "photo2.jpg", rot: "rotate-2" },
+            { year: "The Ground State", title: "First Selfies", desc: "Focusing our lenses. The start of a bond stronger than strong nuclear forces.", img: "photo3.jpg", rot: "-rotate-1" },
+            { year: "The Ground State", title: "Finding Our Tribe", desc: "Particles attracting. The core squad coming together to form an unbreakable lattice.", img: "photo4.jpg", rot: "rotate-2" },
             
-            // Chapter 2
-            { year: "Chapter 2", title: "Physics Dept Memories", desc: "The boys holding down the fort at desk MGC-PHY-D30.", img: "IMG-20260307-WA0092.jpg", rot: "rotate-1" },
-            { year: "Chapter 2", title: "Lab Shenanigans", desc: "Using the computer lab webcam for the most important tasks.", img: "IMG-20260307-WA0093.jpg", rot: "-rotate-3" },
-            { year: "Chapter 2", title: "Under the Shade", desc: "Chilling outdoors, enjoying the campus breeze and endless talks.", img: "IMG-20260307-WA0101.jpg", rot: "-rotate-2" },
-            { year: "Chapter 2", title: "The Boys", desc: "Standing together in the sun, making memories.", img: "IMG-20260307-WA0127.jpg", rot: "rotate-1" },
-            { year: "Chapter 2", title: "Squad Goals", desc: "Another legendary downward circle selfie.", img: "IMG-20260307-WA0119.jpg", rot: "-rotate-1" },
+            // Chapter 2: Kinetic Energy
+            { year: "Kinetic Energy", title: "Desk MGC-PHY-D30", desc: "The legendary Physics desk. Where gravity felt a little lighter and laughter echoed louder.", img: "photo6.jpg", rot: "rotate-1" },
+            { year: "Kinetic Energy", title: "Optics Lab Shenanigans", desc: "Lab practicals: Adjusting the webcam focal length for the absolute perfect group shot.", img: "photo7.jpg", rot: "-rotate-3" },
+            { year: "Kinetic Energy", title: "Circle of Trust", desc: "A unified field. Looking down at the camera but always lifting each other up.", img: "photo8.jpg", rot: "rotate-2" },
+            { year: "Kinetic Energy", title: "Conservation of Energy", desc: "Chilling outdoors, enjoying the campus breeze and conserving our kinetic energy.", img: "photo9.jpg", rot: "-rotate-2" },
+            { year: "Kinetic Energy", title: "The Elements", desc: "Standing together in the sun, absorbing maximum radiation.", img: "photo10.jpg", rot: "rotate-1" },
+            { year: "Kinetic Energy", title: "Centripetal Force", desc: "Another legendary downward circle selfie drawing everyone to the center.", img: "photo11.jpg", rot: "-rotate-1" },
 
-            // Chapter 3
-            { year: "Chapter 3", title: "Traditional Days", desc: "Dressed in red and white, looking our absolute best for Onam.", img: "IMG-20260307-WA0149.jpg", rot: "rotate-2" },
-            { year: "Chapter 3", title: "Secret Santa", desc: "Cake cutting and Merry Christmas wishes in the classroom.", img: "IMG-20260307-WA0100.jpg", rot: "-rotate-1" },
-            { year: "Chapter 3", title: "Christmas on Campus", desc: "Festive vibes and pictures wrapped around the Christmas tree.", img: "IMG-20260307-WA0078.jpg", rot: "rotate-3" },
-            { year: "Chapter 3", title: "The Brotherhood", desc: "The boys sitting out by the Management block.", img: "IMG-20260307-WA0109.jpg", rot: "-rotate-2" },
-            { year: "Chapter 3", title: "The Whole Gang", desc: "Squeezing everyone into one massive classroom selfie.", img: "IMG-20260307-WA0107.jpg", rot: "rotate-1" },
+            // Chapter 3: The Visible Spectrum
+            { year: "The Visible Spectrum", title: "Traditional Days", desc: "Trading lab coats for Kerala Kasavu. The frequency of joy was at its absolute peak.", img: "photo12.jpg", rot: "rotate-2" },
+            { year: "The Visible Spectrum", title: "Thermodynamics of Joy", desc: "Secret Santa cake cutting and spreading warmth during the winter semester.", img: "photo13.jpg", rot: "-rotate-1" },
+            { year: "The Visible Spectrum", title: "Festive Frequencies", desc: "Twinkling lights and festive vibes wrapped around the Christmas tree.", img: "photo14.jpg", rot: "rotate-3" },
+            { year: "The Visible Spectrum", title: "The Brotherhood", desc: "The boys establishing equilibrium by the Management block.", img: "photo15.jpg", rot: "-rotate-2" },
+            { year: "The Visible Spectrum", title: "Maximum Density", desc: "Squeezing the entire class mass into one single classroom volume.", img: "photo16.jpg", rot: "rotate-1" },
 
-            // Chapter 4
-            { year: "The Finale", title: "To the Mountains", desc: "Escaping the campus for the beautiful, rocky green hills.", img: "IMG-20260307-WA0144.jpg", rot: "-rotate-3" },
-            { year: "The Finale", title: "Picture Perfect", desc: "Beautiful smiles amidst the endless green tea estates.", img: "IMG-20260307-WA0148(1).jpg", rot: "rotate-2" },
-            { year: "The Finale", title: "Brothers in Arms", desc: "Posing like absolute bosses in the middle of nowhere.", img: "IMG-20260307-WA0137.jpg", rot: "-rotate-1" },
-            { year: "The Finale", title: "Golden Hour Girls", desc: "Creating the kind of memories that last a lifetime.", img: "IMG-20260307-WA0129(1).jpg", rot: "rotate-2" },
-            { year: "The Finale", title: "Candid Chaos", desc: "Why take a normal picture when you can do this?", img: "IMG-20260307-WA0138.jpg", rot: "-rotate-2" },
-            { year: "The Finale", title: "Above the Clouds", desc: "Gathered on the viewing deck, surrounded by the mist.", img: "IMG-20260307-WA0122.jpg", rot: "rotate-1" },
-            { year: "The Finale", title: "Close-up in the Clouds", desc: "The wind was freezing, but the smiles were warm.", img: "IMG-20260307-WA0123.jpg", rot: "-rotate-2" },
-            { year: "The Finale", title: "Conquering the Heights", desc: "Sitting on the rocks, mist rolling over the mountains behind us.", img: "IMG-20260307-WA0121.jpg", rot: "rotate-2" },
-            { year: "The Finale", title: "One Big Family", desc: "Scattered in the tea gardens, cheering for the best days of our lives.", img: "IMG-20260307-WA0139.jpg", rot: "rotate-3" }
+            // Chapter 4: Maximum Potential
+            { year: "Maximum Potential", title: "Defying Gravity", desc: "Escaping the campus gravitational pull for the beautiful, misty green hills.", img: "photo17.jpg", rot: "-rotate-3" },
+            { year: "Maximum Potential", title: "Picture Perfect", desc: "Capturing the optimal wavelength of smiles amidst the endless tea estates.", img: "photo18.jpg", rot: "rotate-2" },
+            { year: "Maximum Potential", title: "Brothers in Arms", desc: "Posing like absolute bosses with maximum momentum in the middle of nowhere.", img: "photo19.jpg", rot: "-rotate-1" },
+            { year: "Maximum Potential", title: "Golden Hour Optics", desc: "Perfect light refraction creating the kind of memories that last a lifetime.", img: "photo20.jpg", rot: "rotate-2" },
+            { year: "Maximum Potential", title: "Candid Entropy", desc: "Why take a normal, ordered picture when you can maximize the chaos?", img: "photo21.jpg", rot: "-rotate-2" },
+            { year: "Maximum Potential", title: "Above the Clouds", desc: "Reaching peak altitude on the viewing deck, surrounded by the atmosphere.", img: "photo22.jpg", rot: "rotate-1" },
+            { year: "Maximum Potential", title: "Absolute Zero", desc: "The wind was freezing, but the thermal energy of the group kept us warm.", img: "photo23.jpg", rot: "-rotate-2" },
+            { year: "Maximum Potential", title: "Edge of the Universe", desc: "Sitting on the rocks, conquering the mountains and taking in the breathtaking view.", img: "photo24.jpg", rot: "rotate-2" },
+            { year: "Maximum Potential", title: "A Unified Theory", desc: "Scattered in the tea gardens, cheering for the best days of our lives.", img: "photo26.jpg", rot: "rotate-3" }
         ];
 
         const timelineContainer = document.getElementById('timeline-container');
@@ -549,29 +623,29 @@
 
             const html = `
             <div class="camera-flash relative flex flex-col ${isEven ? 'md:flex-row' : 'md:flex-row-reverse'} items-center w-full">
+                <!-- Glowing Photon Node -->
                 <div class="hidden md:flex absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-5 h-5 rounded-full bg-[#d4af37] z-10 items-center justify-center shadow-[0_0_20px_rgba(212,175,55,0.9)]">
                     <div class="w-2 h-2 bg-black rounded-full"></div>
                 </div>
 
-                <div class="w-full md:w-1/2 ${isEven ? 'md:pr-24 lg:pr-36 text-center md:text-right' : 'md:pl-24 lg:pl-36 text-center md:text-left'} ${textRevealClass}">
-                    <p class="text-[#d4af37] font-serif-title tracking-[0.3em] uppercase text-sm mb-4 opacity-90">${item.year}</p>
-                    <h3 class="text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6 font-serif-title drop-shadow-lg leading-tight">${item.title}</h3>
-                    <p class="text-gray-400 leading-relaxed text-xl md:text-2xl font-light italic">"${item.desc}"</p>
+                <div class="w-full md:w-1/2 ${isEven ? 'md:pr-24 lg:pr-36 text-center md:text-right' : 'md:pl-24 lg:pl-36 text-center md:text-left'} ${textRevealClass} mb-8 md:mb-0">
+                    <p class="text-[#d4af37] font-serif-title tracking-[0.3em] uppercase text-xs md:text-sm mb-3 md:mb-4 opacity-90">${item.year}</p>
+                    <h3 class="text-4xl md:text-5xl lg:text-7xl font-bold text-white mb-4 md:mb-6 font-serif-title drop-shadow-lg leading-tight">${item.title}</h3>
+                    <p class="text-gray-400 leading-relaxed text-base sm:text-lg md:text-2xl font-light italic">"${item.desc}"</p>
                 </div>
                 
-                <div class="w-full md:w-1/2 mt-16 md:mt-0 ${isEven ? 'md:pl-20 lg:pl-32 flex justify-center md:justify-start' : 'md:pr-20 lg:pr-32 flex justify-center md:justify-end'} ${imgRevealClass}">
-                    <div class="polaroid-wrapper">
+                <div class="w-full md:w-1/2 mt-4 md:mt-0 ${isEven ? 'md:pl-20 lg:pl-32 flex justify-center md:justify-start' : 'md:pr-20 lg:pr-32 flex justify-center md:justify-end'} ${imgRevealClass}">
+                    <div class="polaroid-wrapper mx-auto md:mx-0">
                         <div class="photo-corner corner-tl"></div>
                         <div class="photo-corner corner-tr"></div>
                         <div class="photo-corner corner-bl"></div>
                         <div class="photo-corner corner-br"></div>
                         
-                        <div class="polaroid transform ${item.rot} w-[85vw] max-w-md cursor-none hoverable">
-                            <!-- Removed forced ratio & cropping! Image scales naturally -->
+                        <div class="polaroid transform ${item.rot} w-[85vw] max-w-[20rem] md:max-w-md cursor-none hoverable">
                             <div class="photo-frame pointer-events-none">
-                                <img src="${item.img}" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\\'flex flex-col items-center justify-center h-48 w-full bg-[#1a1510] text-[#d4af37] border border-[#d4af37]/30\\'><i class=\\'fa-solid fa-image text-4xl mb-3\\'></i><span class=\\'text-xs uppercase tracking-widest font-serif-title text-center\\'>Image Missing<br>Check File Name</span></div>';" alt="${item.title}" loading="lazy">
+                                <img src="${item.img}" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\\'flex flex-col items-center justify-center h-40 md:h-48 w-full bg-[#1a1510] text-[#d4af37] border border-[#d4af37]/30\\'><i class=\\'fa-solid fa-image text-2xl md:text-4xl mb-2 md:mb-3\\'></i><span class=\\'text-[10px] md:text-xs uppercase tracking-widest font-serif-title text-center\\'>Image Missing<br>Check File Name</span></div>';" alt="${item.title}" loading="lazy">
                             </div>
-                            <p class="font-signature text-4xl md:text-5xl text-[#1a1a1a] text-center mt-6 pointer-events-none">${item.title}</p>
+                            <p class="font-signature text-3xl md:text-5xl text-[#1a1a1a] text-center mt-6 pointer-events-none">${item.title}</p>
                         </div>
                     </div>
                 </div>
@@ -579,40 +653,40 @@
             timelineContainer.insertAdjacentHTML('beforeend', html);
         });
 
-        // 🌟 Smoother 3D Tilt Effect 🌟
-        document.querySelectorAll('.polaroid').forEach(card => {
-            const rotClass = Array.from(card.classList).find(c => c.includes('rotate'));
-            const rotValue = rotClass ? (rotClass.includes('-') ? -2 : 2) : 0; 
+        // 🌟 Smoother 3D Tilt Effect (Disabled on Mobile for better performance) 🌟
+        if(window.innerWidth > 768) {
+            document.querySelectorAll('.polaroid').forEach(card => {
+                const rotClass = Array.from(card.classList).find(c => c.includes('rotate'));
+                const rotValue = rotClass ? (rotClass.includes('-') ? -2 : 2) : 0; 
 
-            card.addEventListener('mousemove', (e) => {
-                const rect = card.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
+                card.addEventListener('mousemove', (e) => {
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    
+                    card.style.setProperty('--mouse-x', `${(x / rect.width) * 100}%`);
+                    card.style.setProperty('--mouse-y', `${(y / rect.height) * 100}%`);
+                    
+                    const rotateY = ((x / rect.width) - 0.5) * 12; 
+                    const rotateX = ((y / rect.height) - 0.5) * -12;
+                    
+                    card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.03) translateZ(20px)`;
+                    card.style.zIndex = "50";
+                });
                 
-                card.style.setProperty('--mouse-x', `${(x / rect.width) * 100}%`);
-                card.style.setProperty('--mouse-y', `${(y / rect.height) * 100}%`);
-                
-                const rotateY = ((x / rect.width) - 0.5) * 12; 
-                const rotateX = ((y / rect.height) - 0.5) * -12;
-                
-                card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.03) translateZ(20px)`;
-                card.style.zIndex = "50";
+                card.addEventListener('mouseleave', () => {
+                    card.style.transform = `rotateX(0deg) rotateY(0deg) scale(1) translateZ(0) rotate(${rotValue}deg)`;
+                    card.style.zIndex = "1";
+                });
             });
-            
-            card.addEventListener('mouseleave', () => {
-                card.style.transform = `rotateX(0deg) rotateY(0deg) scale(1) translateZ(0) rotate(${rotValue}deg)`;
-                card.style.zIndex = "1";
-            });
-        });
+        }
 
         // --- 7. SCROLL OBSERVERS & BUTTONS ---
         const startBtn = document.getElementById('start-journey-btn');
         const memoriesSection = document.getElementById('memories-section');
 
         startBtn.addEventListener('click', () => {
-            if(!isMusicPlaying) toggleMusic();
-
-            speedMultiplier = 15; 
+            speedMultiplier = window.innerWidth > 768 ? 15 : 8; // Less extreme rush on mobile
             setTimeout(() => {
                 let slowDown = setInterval(() => {
                     speedMultiplier -= 0.5;
@@ -646,7 +720,7 @@
         function openVideo() {
             if(isMusicPlaying) {
                 bgMusic.pause();
-                musicIcon.classList.remove('fa-volume-up');
+                musicIcon.classList.remove('fa-volume-up', 'animate-bounce');
                 musicIcon.classList.add('fa-volume-xmark');
             }
 
@@ -668,7 +742,7 @@
             if(isMusicPlaying) {
                 bgMusic.play();
                 musicIcon.classList.remove('fa-volume-xmark');
-                musicIcon.classList.add('fa-volume-up');
+                musicIcon.classList.add('fa-volume-up', 'animate-bounce');
             }
 
             setTimeout(() => { 
@@ -707,8 +781,8 @@
             noteDiv.style.transform = `rotate(${randomRotation}deg) scale(0)`;
 
             noteDiv.innerHTML = `
-                <p class="font-signature text-4xl md:text-5xl mb-8 leading-relaxed text-black">"${message}"</p>
-                <p class="font-serif-title font-bold text-right text-sm tracking-widest uppercase text-gray-700">- ${name}</p>
+                <p class="font-signature text-3xl sm:text-4xl md:text-5xl mb-6 md:mb-8 leading-relaxed text-black">"${message}"</p>
+                <p class="font-serif-title font-bold text-right text-xs md:text-sm tracking-widest uppercase text-gray-700">- ${name}</p>
             `;
             
             notesGrid.insertBefore(noteDiv, notesGrid.firstChild);
@@ -723,9 +797,9 @@
 
         // Inject Pre-made Notes
         const defaultNotes = [
-            { msg: "Going to miss the late night canteen sessions. Don't forget us in the corporate world!", author: "Rahul (2nd Yr)", color: "#fff9d6", rot: 2 },
-            { msg: "Thank you for saving me from that strict professor. You're the best.", author: "Priya (1st Yr)", color: "#e8f4f8", rot: -2 },
-            { msg: "The trips won't be the same without your batch's energy! Come visit soon.", author: "Amit (3rd Yr)", color: "#fdf2e9", rot: 1 }
+            { msg: "The seniors who taught us that the best physics happens outside the textbooks. We will miss you!", author: "1st Year Physics", color: "#fff9d6", rot: 2 },
+            { msg: "Thank you for saving us from the strict professors and sharing your notes. You're the best.", author: "1st Year Physics", color: "#e8f4f8", rot: -2 },
+            { msg: "The labs won't be the same without your batch's energy! Wishing you a brilliant future.", author: "1st Year Physics", color: "#fdf2e9", rot: 1 }
         ];
         
         defaultNotes.forEach(note => {
@@ -734,8 +808,8 @@
             noteDiv.style.backgroundColor = note.color;
             noteDiv.style.transform = `rotate(${note.rot}deg)`;
             noteDiv.innerHTML = `
-                <p class="font-signature text-4xl md:text-5xl mb-8 leading-relaxed text-black">"${note.msg}"</p>
-                <p class="font-serif-title font-bold text-right text-sm tracking-widest uppercase text-gray-700">- ${note.author}</p>
+                <p class="font-signature text-3xl sm:text-4xl md:text-5xl mb-6 md:mb-8 leading-relaxed text-black">"${note.msg}"</p>
+                <p class="font-serif-title font-bold text-right text-xs md:text-sm tracking-widest uppercase text-gray-700">- ${note.author}</p>
             `;
             notesGrid.appendChild(noteDiv);
         });
