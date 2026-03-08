@@ -338,25 +338,24 @@
         <div id="notes-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-14 p-2 md:p-4"></div>
     </section>
 
-    <!-- VIDEO MODAL WITH CINEMATIC FIXES -->
+    <!-- PORTRAIT YOUTUBE VIDEO MODAL -->
     <div id="video-modal" class="fixed inset-0 z-[150] bg-[#060403]/98 backdrop-blur-2xl hidden flex-col items-center justify-center p-4 md:p-12 opacity-0 transition-opacity duration-500">
+        
         <button onclick="closeVideoAndShowPopup()" class="hoverable absolute top-4 right-4 md:top-10 md:right-10 text-gray-500 hover:text-[#d4af37] hover:rotate-90 transition-all duration-300 text-4xl md:text-6xl z-50">
             <i class="fa-solid fa-xmark"></i>
         </button>
-        <div class="w-full max-w-7xl aspect-video bg-black rounded-lg overflow-hidden shadow-[0_0_80px_rgba(212,175,55,0.15)] relative scale-95 transition-transform duration-500 border border-[#d4af37]/30 ring-1 ring-white/10" id="video-container">
+        
+        <!-- VERTICAL VIDEO CONTAINER FIX -->
+        <!-- Forced h-[80vh] and aspect-[9/16] so it looks like a perfect phone screen -->
+        <div class="h-[80vh] md:h-[85vh] max-w-full aspect-[9/16] bg-black rounded-xl md:rounded-2xl overflow-hidden shadow-[0_0_150px_rgba(212,175,55,0.2)] relative scale-95 transition-transform duration-500 border border-[#d4af37]/30 ring-1 ring-white/10" id="video-container">
             
-            <!-- CINEMATIC BARS EFFECT -->
-            <div class="absolute top-0 left-0 w-full h-8 md:h-16 bg-black z-10 pointer-events-none opacity-80"></div>
-            <div class="absolute bottom-0 left-0 w-full h-8 md:h-16 bg-black z-10 pointer-events-none opacity-80"></div>
-
-            <video id="farewell-video" controls playsinline preload="auto" class="w-full h-full object-contain" poster="IMG-20260307-WA0139.jpg">
-                <!-- REPLACE WITH YOUR VIDEO LINK: MUST BE EXACTLY NAMED 'farewell-video.mp4' -->
-                <source src="farewell-video.mp4" type="video/mp4">
-                <div class="flex flex-col items-center justify-center h-full text-[#d4af37] bg-[#0d0a08]">
-                    <i class="fa-solid fa-triangle-exclamation text-4xl mb-4"></i>
-                    <p class="font-serif-title tracking-widest uppercase">Video not found. Please rename your video to <b>farewell-video.mp4</b></p>
-                </div>
-            </video>
+            <iframe id="farewell-video" class="w-full h-full" 
+                src="https://www.youtube.com/embed/qwKDVoigZuk" 
+                title="Farewell Video" 
+                frameborder="0" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                allowfullscreen>
+            </iframe>
         </div>
     </div>
 
@@ -401,7 +400,6 @@
         const musicText = document.getElementById('music-text');
         let isMusicPlaying = false;
 
-        // Helper function to handle UI when music starts
         function setMusicPlayingUI() {
             isMusicPlaying = true;
             musicIcon.classList.remove('fa-volume-xmark', 'fa-music');
@@ -431,7 +429,7 @@
             const playPromise = bgMusic.play();
             if (playPromise !== undefined) {
                 playPromise.then(() => {
-                    setMusicPlayingUI(); // It worked!
+                    setMusicPlayingUI(); 
                 }).catch(error => {
                     console.log("Autoplay blocked by browser. Waiting for user interaction.");
                 });
@@ -465,7 +463,6 @@
                     setMusicPlayingUI();
                 }).catch(e => console.log("Interaction play failed."));
             }
-            // Remove listener so it only triggers once
             document.removeEventListener('click', initAudio);
         }, { once: true });
 
@@ -737,7 +734,7 @@
         
         revealElements.forEach(el => revealObserver.observe(el));
 
-        // --- 8. VIDEO & GUESTBOOK MODALS ---
+        // --- 8. YOUTUBE VIDEO & GUESTBOOK MODALS ---
         const videoModal = document.getElementById('video-modal');
         const videoContainer = document.getElementById('video-container');
         const videoElement = document.getElementById('farewell-video');
@@ -756,7 +753,6 @@
                 videoModal.classList.remove('opacity-0');
                 videoContainer.classList.remove('scale-95');
                 videoContainer.classList.add('scale-100');
-                videoElement.play();
             }, 10);
         }
 
@@ -764,9 +760,11 @@
             videoModal.classList.add('opacity-0');
             videoContainer.classList.remove('scale-100');
             videoContainer.classList.add('scale-95');
-            videoElement.pause();
             
-            // Resume background music when video closes
+            // Stop YouTube video from playing in the background
+            const iframeSrc = videoElement.src;
+            videoElement.src = iframeSrc;
+            
             if(isMusicPlaying) {
                 bgMusic.play();
                 musicIcon.classList.remove('fa-volume-xmark');
@@ -775,7 +773,6 @@
 
             setTimeout(() => { 
                 videoModal.classList.add('hidden'); 
-                videoElement.currentTime = 0; // Reset video to the beginning
                 guestbookModal.classList.remove('hidden');
                 setTimeout(() => {
                     guestbookModal.classList.remove('opacity-0');
@@ -783,8 +780,6 @@
                 }, 50);
             }, 500);
         }
-
-        videoElement.addEventListener('ended', closeVideoAndShowPopup);
 
         function closeGuestbookPopup() {
             guestbookModal.classList.add('opacity-0');
